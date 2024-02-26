@@ -1,128 +1,160 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	<xs:element name="osm">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="domain" minOccurs="1" maxOccurs="1"/>
-				<xs:element ref="node" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="way" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="relation" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="poi" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="area" minOccurs="0" maxOccurs="unbounded"/>
-			</xs:sequence>
-			<xs:attribute name="source" type="xs:string" use="required"/>
-		</xs:complexType>
-	</xs:element>
-	
-	<xs:element name="domain">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="type" minOccurs="0" maxOccurs="3"/>
-				<xs:element ref="or" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="locationArea" minOccurs="1" maxOccurs="1"/>
-			</xs:sequence>
-			<xs:attribute name="overpass" type="xs:string"/>
-		</xs:complexType>
-	</xs:element>
+    <xs:element name="osm">
+        <xs:annotation>
+            <xs:documentation>Root element</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="domain" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="node" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="way" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="relation" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="poi" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="area" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="source" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="domain">
+        <xs:annotation>
+            <xs:documentation>Geographical area and/or tags that border the scope of this dataset. Searching for these tags within this area in the OSM database should return all elements from this dataset. If there are more in OSM, than those are wrongly tagged or outdated (or the dataset is missing elements).</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="type" minOccurs="0" maxOccurs="3"/>
+                <xs:element ref="or" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="locationArea" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="overpass" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
 
-	<xs:element name="node">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="locationArea" minOccurs="0" maxOccurs="unbounded"/>
-			</xs:sequence>
-			<xs:attributeGroup ref="actionGroup"/>
-			<xs:attributeGroup ref="locationGroup"/>
-		</xs:complexType>
-	</xs:element>
-	
-	<xs:element name="way">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="nd" minOccurs="2" maxOccurs="2000"/>
-				<xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="locationArea" minOccurs="0" maxOccurs="unbounded"/>
-			</xs:sequence>
-			<xs:attributeGroup ref="actionGroup"/>
-			<xs:attributeGroup ref="locationGroup"/>
-		</xs:complexType>
-	</xs:element>
-	
-	<xs:element name="waychain">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="nd" minOccurs="2" maxOccurs="2000"/>
-				<xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="locationArea" minOccurs="0" maxOccurs="unbounded"/>
-			</xs:sequence>
-			<xs:attributeGroup ref="actionGroup"/>
-			<xs:attributeGroup ref="locationGroup"/>
-		</xs:complexType>
-	</xs:element>
-	
-	<xs:element name="nd">
-		<xs:complexType>
-			<xs:attribute name="ref" type="xs:unsignedLong"/>
-		</xs:complexType>
-	</xs:element>
+    <xs:element name="node">
+        <xs:annotation>
+            <xs:documentation>Dataset element. Element in OSM must be of type node</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="locationArea" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="actionGroup"/>
+            <xs:attributeGroup ref="locationGroup"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="way">
+        <xs:annotation>
+            <xs:documentation>Dataset element. Element in OSM must be of type way</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="nd" minOccurs="2" maxOccurs="2000"/>
+                <xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="locationArea" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="actionGroup"/>
+            <xs:attributeGroup ref="locationGroup"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="waychain">
+        <xs:annotation>
+            <xs:documentation>Dataset element. Element in OSM must be a chain of linked ways, no matter if one or more ways, but each must adhere to tag rules</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="nd" minOccurs="2" maxOccurs="2000"/>
+                <xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="locationArea" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="actionGroup"/>
+            <xs:attributeGroup ref="locationGroup"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="nd">
+        <xs:complexType>
+            <xs:attribute name="ref" type="xs:unsignedLong"/>
+        </xs:complexType>
+    </xs:element>
 
     <xs:element name="relation">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="member" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="locationArea" minOccurs="0" maxOccurs="unbounded"/>
-			</xs:sequence>
-			<xs:attributeGroup ref="actionGroup"/>
-			<xs:attributeGroup ref="locationGroup"/>
-		</xs:complexType>
-	</xs:element>
+        <xs:annotation>
+            <xs:documentation>Dataset element. Element in OSM must be of type relation</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="member" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="locationArea" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="actionGroup"/>
+            <xs:attributeGroup ref="locationGroup"/>
+        </xs:complexType>
+    </xs:element>
 
-	<xs:element name="member">
-		<xs:complexType>
-			<xs:attribute name="type">
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:enumeration value="node"/>
-						<xs:enumeration value="way"/>
-						<xs:enumeration value="relation"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:attribute>
-			<xs:attribute name="ref" type="xs:unsignedLong"/>
-			<xs:attribute name="role" type="xs:string"/>
-		</xs:complexType>
-	</xs:element>
+    <xs:element name="member">
+        <xs:complexType>
+            <xs:attribute name="type">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="node"/>
+                        <xs:enumeration value="way"/>
+                        <xs:enumeration value="relation"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="ref" type="xs:unsignedLong"/>
+            <xs:attribute name="role" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
 
     <xs:element name="area">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="locationArea" minOccurs="0" maxOccurs="unbounded"/>
-			</xs:sequence>
-			<xs:attributeGroup ref="actionGroup"/>
-			<xs:attributeGroup ref="locationGroup"/>
-		</xs:complexType>
-	</xs:element>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="locationArea" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="actionGroup"/>
+            <xs:attributeGroup ref="locationGroup"/>
+        </xs:complexType>
+    </xs:element>
 
     <xs:element name="poi">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="or" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="locationArea" minOccurs="0" maxOccurs="unbounded"/>
-			</xs:sequence>
-			<xs:attributeGroup ref="actionGroup"/>
-			<xs:attributeGroup ref="locationGroup"/>
-		</xs:complexType>
-	</xs:element>
+        <xs:annotation>
+            <xs:documentation>Dataset element. Element in OSM can be of any type</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="or" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="locationArea" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attributeGroup ref="actionGroup"/>
+            <xs:attributeGroup ref="locationGroup"/>
+        </xs:complexType>
+    </xs:element>
 
-	<xs:element name="tag">
-		<xs:complexType>
-			<xs:attribute name="k" type="xs:string"/>
-			<xs:attribute name="v" type="xs:string"/>
-			<xs:attribute name="function">
+    <xs:element name="tag">
+        <xs:complexType>
+            <xs:attribute name="k" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Tag key</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="v" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Tag value</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
+
+            <xs:attribute name="function">
+                <xs:annotation>
+                    <xs:documentation>Matching function type for tag which should return true. Comparing string, phone number, or something else.</xs:documentation>
+                </xs:annotation>
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:enumeration value="match" />
@@ -131,12 +163,12 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-		</xs:complexType>
-	</xs:element>
+        </xs:complexType>
+    </xs:element>
 
-	<xs:element name="type">
-		<xs:complexType>
-			<xs:attribute name="elementType">
+    <xs:element name="type">
+        <xs:complexType>
+            <xs:attribute name="elementType">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
                         <xs:enumeration value="node" />
@@ -145,57 +177,63 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-		</xs:complexType>
-	</xs:element>
-	
-	<xs:element name="and">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="type" minOccurs="0" maxOccurs="3"/>
-				<xs:element ref="or" minOccurs="0" maxOccurs="unbounded"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:element name="or">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element ref="type" minOccurs="0" maxOccurs="3"/>
-				<xs:element ref="and" minOccurs="0" maxOccurs="unbounded"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
+        </xs:complexType>
+    </xs:element>
 
-	<xs:element name="locationArea">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element name='node' minOccurs="2" maxOccurs="2000">
-					<xs:complexType>
-						<xs:attribute name="lat" type="xs:double"/>
-						<xs:attribute name="lon" type="xs:double"/>
-					</xs:complexType>
-				</xs:element>
-				<xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
-			</xs:sequence>
-			<xs:attribute name="name" type="xs:string"/>
-		</xs:complexType>
-	</xs:element>
+    <xs:element name="and">
+        <xs:annotation>
+            <xs:documentation>AND logical operation on tags</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="type" minOccurs="0" maxOccurs="3"/>
+                <xs:element ref="or" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="or">
+        <xs:annotation>
+            <xs:documentation>OR logical operation on tags</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="type" minOccurs="0" maxOccurs="3"/>
+                <xs:element ref="and" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 
-	<xs:attributeGroup name="actionGroup">
-		<xs:attribute name="action">
-			<xs:simpleType>
-				<xs:restriction base="xs:string">
-					<xs:enumeration value="conflate" />
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-	</xs:attributeGroup>
+    <xs:element name="locationArea">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name='node' minOccurs="2" maxOccurs="2000">
+                    <xs:complexType>
+                        <xs:attribute name="lat" type="xs:double"/>
+                        <xs:attribute name="lon" type="xs:double"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
 
-	<xs:attributeGroup name="locationGroup">
-		<xs:attribute name="lat" type="xs:double"/>
-		<xs:attribute name="lon" type="xs:double"/>
-		<xs:attribute name="maxDistance" type="xs:unsignedLong"/>
-	</xs:attributeGroup>
+    <xs:attributeGroup name="actionGroup">
+        <xs:attribute name="action">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="conflate" />
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:attributeGroup>
+
+    <xs:attributeGroup name="locationGroup">
+        <xs:attribute name="lat" type="xs:double"/>
+        <xs:attribute name="lon" type="xs:double"/>
+        <xs:attribute name="maxDistance" type="xs:unsignedLong"/>
+    </xs:attributeGroup>
 
 </xs:schema>
