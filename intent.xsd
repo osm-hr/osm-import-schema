@@ -25,7 +25,12 @@
                 <xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="type" minOccurs="0" maxOccurs="3"/>
                 <xs:element ref="or" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="locationArea" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="locationArea" minOccurs="0" maxOccurs="1"/>
+                <xs:element name="dataExtract" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:attribute name="url" type="xs:string"/>
+                    </xs:complexType>
+                </xs:element>
             </xs:sequence>
             <xs:attribute name="overpass" type="xs:string"/>
         </xs:complexType>
