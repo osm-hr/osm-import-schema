@@ -1,15 +1,23 @@
 # OpenStreetMap import schema
 
-This XML schema is intended for mapping elements within outside data with OpenStreetMap data.
+This XML schema is intended for prepairing outside elements to be imported to OpenStreetMap data.
+
+## The goal
+
+The goal of this schema is to have a standard schema for importing data to OpenStreetMap. This schema could then be used by various import or comparison tools. This would then make it easier to publish those XML files which could be analysed and scrutinised by the community before any import goes through.
+
+## XML Elements
+
+### Domain
+
+Domain is used to give us a strict subset of data from OpenStreetMap that is the domain of this import. If all elements of this import have a unique tag `ref:HR:e-matica=*` which isn't used anywhere else, than the domain can only reference that tag. If this import has all capital cities of the world, then domain should have tags `place=city` and `capital=yes`. 
 
 ## Examples
 
 ```
-<osm>
+<osm source="http://opendata.com/e-school-data">
   <domain>
-    <locationArea name="Croatia" />
-    <tag k="amenity" v="school" />
-    <tag k="ref:HR:e-matica" />
+    <tag k="ref:HR:e-school-data" />
   </domain>
   <poi>
     <tag k="name" v="Osnovna škola Centar" function="match" />
