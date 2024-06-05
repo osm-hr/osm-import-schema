@@ -213,12 +213,6 @@
     <xs:element name="locationArea">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name='node' minOccurs="2" maxOccurs="2000">
-                    <xs:complexType>
-                        <xs:attribute name="lat" type="xs:double"/>
-                        <xs:attribute name="lon" type="xs:double"/>
-                    </xs:complexType>
-                </xs:element>
                 <xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="name" type="xs:string"/>
