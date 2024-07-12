@@ -12,6 +12,7 @@
                 <xs:element ref="relation" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="poi" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="area" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="template" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="source" type="xs:string" use="required"/>
         </xs:complexType>
@@ -216,6 +217,33 @@
                 <xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="name" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="template">
+        <xs:annotation>
+            <xs:documentation>Template from which elements are created from a source</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="node" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="way" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="relation" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="poi" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="area" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="type">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="alltheplaces" />
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="spider" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>Which Alltheplaces spider to use in this template</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
         </xs:complexType>
     </xs:element>
 
