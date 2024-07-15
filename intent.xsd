@@ -156,6 +156,11 @@
                     <xs:documentation>Tag value</xs:documentation>
                 </xs:annotation>
             </xs:attribute>
+            <xs:attribute name="template" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>yes if the tag is a part of a template, default no</xs:documentation>
+                </xs:annotation>
+            </xs:attribute>
 
             <xs:attribute name="function">
                 <xs:annotation>
