@@ -48,6 +48,7 @@
             </xs:sequence>
             <xs:attributeGroup ref="actionGroup"/>
             <xs:attributeGroup ref="locationGroup"/>
+            <xs:attributeGroup ref="idsGroup"/>
         </xs:complexType>
     </xs:element>
 
@@ -63,6 +64,7 @@
             </xs:sequence>
             <xs:attributeGroup ref="actionGroup"/>
             <xs:attributeGroup ref="locationGroup"/>
+            <xs:attributeGroup ref="idsGroup"/>
         </xs:complexType>
     </xs:element>
 
@@ -78,6 +80,7 @@
             </xs:sequence>
             <xs:attributeGroup ref="actionGroup"/>
             <xs:attributeGroup ref="locationGroup"/>
+            <xs:attributeGroup ref="idsGroup"/>
         </xs:complexType>
     </xs:element>
 
@@ -99,6 +102,7 @@
             </xs:sequence>
             <xs:attributeGroup ref="actionGroup"/>
             <xs:attributeGroup ref="locationGroup"/>
+            <xs:attributeGroup ref="idsGroup"/>
         </xs:complexType>
     </xs:element>
 
@@ -126,6 +130,7 @@
             </xs:sequence>
             <xs:attributeGroup ref="actionGroup"/>
             <xs:attributeGroup ref="locationGroup"/>
+            <xs:attributeGroup ref="idsGroup"/>
         </xs:complexType>
     </xs:element>
 
@@ -141,6 +146,7 @@
             </xs:sequence>
             <xs:attributeGroup ref="actionGroup"/>
             <xs:attributeGroup ref="locationGroup"/>
+            <xs:attributeGroup ref="idsGroup"/>
         </xs:complexType>
     </xs:element>
 
@@ -260,6 +266,10 @@
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
+    </xs:attributeGroup>
+
+    <xs:attributeGroup name="idsGroup">
+        <xs:attribute name="atp-id" />
     </xs:attributeGroup>
 
     <xs:attributeGroup name="locationGroup">
