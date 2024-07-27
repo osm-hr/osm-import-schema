@@ -231,6 +231,38 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="matches">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="node" minOccurs="0" maxOccurs="unbounded">
+                    <xs:attribute name="id" />
+                    <xs:attributeGroup ref="matchType"/>
+                </xs:element>
+                <xs:element name="way" minOccurs="0" maxOccurs="unbounded">
+                    <xs:attribute name="id" />
+                    <xs:attributeGroup ref="matchType"/>
+                </xs:element>
+                <xs:element name="relation" minOccurs="0" maxOccurs="unbounded">
+                    <xs:attribute name="id" />
+                    <xs:attributeGroup ref="matchType"/>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:attributeGroup name="matchType">
+        <xs:attribute name="tagsMatch">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="exact" />
+                    <xs:enumeration value="partial" />
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="distance" type="xs:double"/>
+    </xs:attributeGroup>
+
     <xs:element name="template">
         <xs:annotation>
             <xs:documentation>Template from which elements are created from a source</xs:documentation>
