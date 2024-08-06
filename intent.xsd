@@ -13,6 +13,7 @@
                 <xs:element ref="poi" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="area" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="template" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="matches" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="source" type="xs:string" use="required"/>
         </xs:complexType>
@@ -143,6 +144,7 @@
                 <xs:element ref="tag" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="or" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="locationArea" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="matches" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attributeGroup ref="actionGroup"/>
             <xs:attributeGroup ref="locationGroup"/>
@@ -235,16 +237,22 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="node" minOccurs="0" maxOccurs="unbounded">
-                    <xs:attribute name="id" />
-                    <xs:attributeGroup ref="matchType"/>
+                    <xs:complexType>
+                        <xs:attribute name="id" type="xs:string" use="required"/>
+                        <xs:attributeGroup ref="matchType"/>
+                    </xs:complexType>
                 </xs:element>
                 <xs:element name="way" minOccurs="0" maxOccurs="unbounded">
-                    <xs:attribute name="id" />
-                    <xs:attributeGroup ref="matchType"/>
+                    <xs:complexType>
+                        <xs:attribute name="id" type="xs:string" use="required"/>
+                        <xs:attributeGroup ref="matchType"/>
+                    </xs:complexType>
                 </xs:element>
                 <xs:element name="relation" minOccurs="0" maxOccurs="unbounded">
-                    <xs:attribute name="id" />
-                    <xs:attributeGroup ref="matchType"/>
+                    <xs:complexType>
+                        <xs:attribute name="id" type="xs:string" use="required"/>
+                        <xs:attributeGroup ref="matchType"/>
+                    </xs:complexType>
                 </xs:element>
             </xs:sequence>
             <xs:attribute name="name" type="xs:string"/>
@@ -302,6 +310,7 @@
 
     <xs:attributeGroup name="idsGroup">
         <xs:attribute name="atp-id" />
+        <xs:attribute name="atp-spider" />
     </xs:attributeGroup>
 
     <xs:attributeGroup name="locationGroup">
